@@ -46,11 +46,9 @@
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         
-        /* Mobile Touch & Scroll Optimizations */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Prevent iOS Safari font scaling auto-zoom on input focus */
         @media (max-width: 640px) {
             input, select, textarea {
                 font-size: 16px !important;
@@ -70,10 +68,9 @@
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 gap-2">
                 
-                <!-- Modern Fixed Brand Logo & Business Title -->
+                <!-- Fixed Brand Logo & Business Title -->
                 <div class="flex items-center space-x-2 sm:space-x-3 min-w-0">
                     <div class="relative bg-gradient-to-tr from-cyan-600 via-blue-600 to-teal-400 p-2 sm:p-2.5 rounded-xl sm:rounded-2xl shadow-lg shadow-cyan-500/20 text-white flex items-center justify-center w-9 h-9 sm:w-11 sm:h-11 border border-cyan-400/30 shrink-0">
-                        <!-- Custom Refilled Water Droplet & Gallon Vector Logo -->
                         <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2.25c-3.5 4.5-6.75 8.25-6.75 11.25a6.75 6.75 0 0013.5 0c0-3-3.25-6.75-6.75-11.25zM12 18.5a3 3 0 01-3-3"></path>
                         </svg>
@@ -90,14 +87,14 @@
                     </div>
                 </div>
 
-                <!-- Mode/Role Selector & Quick Expense Button -->
+                <!-- Mode/Role Selector & Quick Actions -->
                 <div class="flex items-center space-x-1.5 sm:space-x-3 shrink-0">
                     <div class="bg-slate-800 p-0.5 sm:p-1 rounded-xl border border-slate-700 flex text-xs font-medium">
-                        <button id="roleCashierBtn" onclick="switchRole('cashier')" class="px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-slate-300 hover:text-white active:scale-95">
+                        <button id="roleCashierBtn" onclick="switchRole('cashier')" class="px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-white bg-aqua-600 shadow-sm active:scale-95">
                             <i class="fa-solid fa-cash-register text-xs"></i>
                             <span class="text-[11px] sm:text-xs">Kasir</span>
                         </button>
-                        <button id="roleAdminBtn" onclick="switchRole('admin')" class="px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-white bg-aqua-600 shadow-sm active:scale-95">
+                        <button id="roleAdminBtn" onclick="switchRole('admin')" class="px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-slate-300 hover:text-white active:scale-95">
                             <i class="fa-solid fa-user-shield text-xs"></i>
                             <span class="text-[11px] sm:text-xs">Pemilik</span>
                         </button>
@@ -121,11 +118,11 @@
         <!-- Tab Navigation Bar -->
         <nav class="bg-slate-800 border-t border-slate-700/50 text-slate-300 text-xs sm:text-sm overflow-x-auto no-scrollbar touch-pan-x">
             <div class="max-w-7xl mx-auto px-2 sm:px-4 flex space-x-1 sm:space-x-2">
-                <button onclick="switchTab('pos')" id="tab-pos" class="tab-btn py-3 px-3 sm:px-3.5 font-medium flex items-center space-x-1.5 sm:space-x-2 border-b-2 border-transparent hover:text-white transition whitespace-nowrap active:bg-slate-700/50 rounded-t-lg">
+                <button onclick="switchTab('pos')" id="tab-pos" class="tab-btn py-3 px-3 sm:px-3.5 font-medium flex items-center space-x-1.5 sm:space-x-2 border-b-2 border-aqua-500 text-white transition whitespace-nowrap active:bg-slate-700/50 rounded-t-lg">
                     <i class="fa-solid fa-cash-register"></i>
                     <span>Kasir POS</span>
                 </button>
-                <button onclick="switchTab('dashboard')" id="tab-dashboard" class="tab-btn py-3 px-3 sm:px-3.5 font-medium flex items-center space-x-1.5 sm:space-x-2 border-b-2 border-aqua-500 text-white transition whitespace-nowrap active:bg-slate-700/50 rounded-t-lg">
+                <button onclick="switchTab('dashboard')" id="tab-dashboard" class="tab-btn py-3 px-3 sm:px-3.5 font-medium flex items-center space-x-1.5 sm:space-x-2 border-b-2 border-transparent hover:text-white transition whitespace-nowrap active:bg-slate-700/50 rounded-t-lg">
                     <i class="fa-solid fa-chart-pie"></i>
                     <span>Dasbor</span>
                 </button>
@@ -142,7 +139,7 @@
                     <i class="fa-solid fa-receipt"></i>
                     <span>Pengeluaran</span>
                 </button>
-                <button onclick="switchTab('reports')" id="tab-reports" class="tab-btn py-3 px-3 sm:px-3.5 font-medium flex items-center space-x-1.5 sm:space-x-2 border-b-2 border-transparent hover:text-white transition admin-only whitespace-nowrap active:bg-slate-700/50 rounded-t-lg">
+                <button onclick="switchTab('reports')" id="tab-reports" class="tab-btn py-3 px-3 sm:px-3.5 font-medium flex items-center space-x-1.5 sm:space-x-2 border-b-2 border-transparent hover:text-white transition admin-only hidden whitespace-nowrap active:bg-slate-700/50 rounded-t-lg">
                     <i class="fa-solid fa-file-invoice-dollar"></i>
                     <span>Laporan Laba Rugi</span>
                 </button>
@@ -161,8 +158,162 @@
             </div>
         </div>
 
-        <!-- DASBOR UTAMA SECTION -->
-        <section id="view-dashboard" class="tab-content space-y-4 sm:space-y-6">
+        <!-- 1. KASIR POS TERMINAL SECTION (Default Active Tab) -->
+        <section id="view-pos" class="tab-content space-y-4 sm:space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
+                <!-- Left Column: Products & Customer Selection -->
+                <div class="lg:col-span-7 space-y-4 sm:space-y-6">
+                    <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200/80">
+                        <h2 class="text-sm sm:text-base font-bold text-slate-900 mb-3 flex items-center justify-between">
+                            <span>Pilih Jenis Transaksi</span>
+                            <span class="text-[10px] sm:text-xs text-slate-400 font-normal"><i class="fa-solid fa-bolt"></i> Cepat &lt; 10 dtk</span>
+                        </h2>
+
+                        <!-- Product Grid (Responsive Touch Cards) -->
+                        <div class="grid grid-cols-2 gap-2.5 sm:gap-3" id="posProductGrid">
+                            <!-- Item 1: Refill Only -->
+                            <button id="pos-card-refill" onclick="selectPosItem('refill', 'Isi Ulang Galon', 6000, this)" class="pos-item-card text-left p-3.5 sm:p-4 rounded-xl border-2 border-aqua-500 ring-2 ring-aqua-500 bg-aqua-50/40 hover:border-aqua-500 transition active:scale-95 flex flex-col justify-between group touch-manipulation min-h-[110px]">
+                                <div class="flex justify-between items-start w-full">
+                                    <span class="p-2 sm:p-2.5 bg-sky-100 text-sky-600 rounded-lg group-hover:scale-110 transition shrink-0"><i class="fa-solid fa-arrows-rotate text-base sm:text-lg"></i></span>
+                                    <span class="font-bold text-slate-900 text-xs sm:text-base">Rp 6.000</span>
+                                </div>
+                                <div class="mt-2 sm:mt-3">
+                                    <h4 class="font-semibold text-slate-800 text-xs sm:text-sm leading-tight">Isi Ulang Saja</h4>
+                                    <p class="text-[10px] sm:text-xs text-slate-500 mt-0.5 line-clamp-1">Bawa galon sendiri</p>
+                                </div>
+                            </button>
+
+                            <!-- Item 2: Buy New Gallon + Refill -->
+                            <button id="pos-card-new_gallon" onclick="selectPosItem('new_gallon', 'Galon Baru + Isi', 55000, this)" class="pos-item-card text-left p-3.5 sm:p-4 rounded-xl border-2 border-slate-100 hover:border-aqua-500 transition active:scale-95 flex flex-col justify-between group touch-manipulation min-h-[110px]">
+                                <div class="flex justify-between items-start w-full">
+                                    <span class="p-2 sm:p-2.5 bg-emerald-100 text-emerald-600 rounded-lg group-hover:scale-110 transition shrink-0"><i class="fa-solid fa-bottle-water text-base sm:text-lg"></i></span>
+                                    <span class="font-bold text-slate-900 text-xs sm:text-base">Rp 55.000</span>
+                                </div>
+                                <div class="mt-2 sm:mt-3">
+                                    <h4 class="font-semibold text-slate-800 text-xs sm:text-sm leading-tight">Galon Baru + Isi</h4>
+                                    <p class="text-[10px] sm:text-xs text-slate-500 mt-0.5 line-clamp-1">Beli galon fisik baru</p>
+                                </div>
+                            </button>
+
+                            <!-- Item 3: Aqua Asli -->
+                            <button id="pos-card-aqua_asli" onclick="selectPosItem('aqua_asli', 'Aqua Asli', 22000, this)" class="pos-item-card text-left p-3.5 sm:p-4 rounded-xl border-2 border-slate-100 hover:border-aqua-500 transition active:scale-95 flex flex-col justify-between group touch-manipulation min-h-[110px]">
+                                <div class="flex justify-between items-start w-full">
+                                    <span class="p-2 sm:p-2.5 bg-blue-100 text-blue-600 rounded-lg group-hover:scale-110 transition shrink-0"><i class="fa-solid fa-faucet-drip text-base sm:text-lg"></i></span>
+                                    <span class="font-bold text-slate-900 text-xs sm:text-base">Rp 22.000</span>
+                                </div>
+                                <div class="mt-2 sm:mt-3">
+                                    <h4 class="font-semibold text-slate-800 text-xs sm:text-sm leading-tight">Aqua Asli</h4>
+                                    <p class="text-[10px] sm:text-xs text-slate-500 mt-0.5 line-clamp-1">Kemasan pabrik asli</p>
+                                </div>
+                            </button>
+
+                            <!-- Item 4: Gallon Loan / Deposit -->
+                            <button id="pos-card-loan" onclick="selectPosItem('loan', 'Pinjam Galon Depot', 0, this)" class="pos-item-card text-left p-3.5 sm:p-4 rounded-xl border-2 border-slate-100 hover:border-aqua-500 transition active:scale-95 flex flex-col justify-between group touch-manipulation min-h-[110px]">
+                                <div class="flex justify-between items-start w-full">
+                                    <span class="p-2 sm:p-2.5 bg-amber-100 text-amber-600 rounded-lg group-hover:scale-110 transition shrink-0"><i class="fa-solid fa-handshake text-base sm:text-lg"></i></span>
+                                    <span class="font-bold text-slate-900 text-xs sm:text-base">Rp 0</span>
+                                </div>
+                                <div class="mt-2 sm:mt-3">
+                                    <h4 class="font-semibold text-slate-800 text-xs sm:text-sm leading-tight">Pinjam Galon</h4>
+                                    <p class="text-[10px] sm:text-xs text-slate-500 mt-0.5 line-clamp-1">Pinjam galon depot</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Customer Select -->
+                    <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200/80">
+                        <div class="flex justify-between items-center mb-2.5 sm:mb-3">
+                            <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Profil Pelanggan</label>
+                            <button onclick="openModal('addCustomerModal')" class="text-xs text-aqua-600 font-semibold hover:underline flex items-center gap-1 active:scale-95">
+                                <i class="fa-solid fa-user-plus"></i> + Pelanggan Baru
+                            </button>
+                        </div>
+                        <select id="posCustomerSelect" onchange="updatePosCustomerInfo()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-aqua-500">
+                            <option value="walkin">Pelanggan Umum (Tunai Langsung)</option>
+                        </select>
+                        <div id="posCustomerDetail" class="hidden mt-3 p-3 bg-slate-50 rounded-xl border border-slate-100 text-xs text-slate-600 flex flex-wrap justify-between gap-2">
+                            <span>WA: <b id="posCustPhone">-</b></span>
+                            <span>Bon: <b id="posCustTab" class="text-red-600">Rp 0</b></span>
+                            <span>Pinjam: <b id="posCustGallons">0 unit</b></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Cart & Payment Checkout -->
+                <div class="lg:col-span-5">
+                    <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200/80 sticky top-20 space-y-3.5 sm:space-y-4">
+                        <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                            <h3 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                                <i class="fa-solid fa-cart-shopping text-aqua-600"></i> Keranjang Transaksi
+                            </h3>
+                            <button onclick="resetCart()" class="text-xs text-red-500 font-medium hover:underline active:scale-95">Reset</button>
+                        </div>
+
+                        <!-- Selected Item Banner -->
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-100">
+                            <div class="flex justify-between items-center">
+                                <span id="cartItemTitle" class="font-semibold text-slate-800 text-xs sm:text-sm truncate">Isi Ulang Galon</span>
+                                <span id="cartUnitPrice" class="text-xs font-bold text-slate-500 shrink-0 ml-2">Rp 6.000 / unit</span>
+                            </div>
+
+                            <!-- Touch-Friendly Quantity Counter -->
+                            <div class="flex items-center justify-between mt-3.5">
+                                <span class="text-xs font-medium text-slate-500">Jumlah Galon</span>
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="changePosQty(-1)" class="w-11 h-11 sm:w-9 sm:h-9 rounded-xl bg-white border border-slate-200 text-slate-800 font-bold hover:bg-slate-100 active:scale-90 shadow-sm flex items-center justify-center text-lg sm:text-base touch-manipulation">-</button>
+                                    <input type="number" id="cartQtyInput" min="1" value="1" oninput="calculatePosTotal()" class="w-16 text-center border border-slate-200 rounded-xl py-2 font-bold text-slate-900 text-sm sm:text-base bg-white">
+                                    <button onclick="changePosQty(1)" class="w-11 h-11 sm:w-9 sm:h-9 rounded-xl bg-white border border-slate-200 text-slate-800 font-bold hover:bg-slate-100 active:scale-90 shadow-sm flex items-center justify-center text-lg sm:text-base touch-manipulation">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Auto Stock Deduction Note -->
+                        <div class="p-2.5 sm:p-3 bg-sky-50 rounded-xl text-sky-800 text-[11px] sm:text-xs flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info text-sky-500 shrink-0"></i>
+                            <span>Mengurangi <b id="cartCapDeduct">1</b> Tutup & <b id="cartTissueDeduct">1</b> Tisu.</span>
+                        </div>
+
+                        <!-- Payment Method Picker -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Metode Pembayaran</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button type="button" onclick="setPaymentMethod('cash')" id="payBtn-cash" class="pay-method-btn p-2.5 sm:p-3 text-center border-2 border-aqua-500 bg-aqua-50/50 text-aqua-700 rounded-xl text-xs font-bold transition active:scale-95 touch-manipulation">
+                                    <i class="fa-solid fa-money-bill-wave text-sm sm:text-base block mb-0.5"></i> Tunai
+                                </button>
+                                <button type="button" onclick="setPaymentMethod('qris')" id="payBtn-qris" class="pay-method-btn p-2.5 sm:p-3 text-center border-2 border-slate-200 text-slate-600 rounded-xl text-xs font-bold transition hover:border-slate-300 active:scale-95 touch-manipulation">
+                                    <i class="fa-solid fa-qrcode text-sm sm:text-base block mb-0.5"></i> QRIS
+                                </button>
+                                <button type="button" onclick="setPaymentMethod('tab')" id="payBtn-tab" class="pay-method-btn p-2.5 sm:p-3 text-center border-2 border-slate-200 text-slate-600 rounded-xl text-xs font-bold transition hover:border-slate-300 active:scale-95 touch-manipulation">
+                                    <i class="fa-solid fa-book-bookmark text-sm sm:text-base block mb-0.5"></i> Bon / Piutang
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Order Summary Total -->
+                        <div class="pt-2 sm:pt-3 border-t border-slate-100 space-y-1">
+                            <div class="flex justify-between text-xs text-slate-500">
+                                <span>Subtotal</span>
+                                <span id="cartSubtotal">Rp 6.000</span>
+                            </div>
+                            <div class="flex justify-between text-base sm:text-lg font-extrabold text-slate-900 pt-1">
+                                <span>Total Bayar</span>
+                                <span id="cartTotal" class="text-emerald-600">Rp 6.000</span>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button onclick="processCheckout()" class="w-full bg-gradient-to-r from-aqua-600 to-teal-600 hover:from-aqua-700 hover:to-teal-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-aqua-500/20 active:scale-95 transition flex items-center justify-center space-x-2 text-sm sm:text-base touch-manipulation">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Selesaikan Transaksi</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. DASBOR UTAMA SECTION -->
+        <section id="view-dashboard" class="tab-content hidden space-y-4 sm:space-y-6">
             <!-- Top Metric Cards -->
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 <!-- Penjualan Hari Ini -->
@@ -309,162 +460,7 @@
             </div>
         </section>
 
-        <!-- KASIR POS TERMINAL SECTION -->
-        <section id="view-pos" class="tab-content hidden space-y-4 sm:space-y-6">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
-                <!-- Left Column: Products & Customer Selection -->
-                <div class="lg:col-span-7 space-y-4 sm:space-y-6">
-                    <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200/80">
-                        <h2 class="text-sm sm:text-base font-bold text-slate-900 mb-3 flex items-center justify-between">
-                            <span>Pilih Jenis Transaksi</span>
-                            <span class="text-[10px] sm:text-xs text-slate-400 font-normal"><i class="fa-solid fa-bolt"></i> Cepat &lt; 10 dtk</span>
-                        </h2>
-
-                        <!-- Product Grid (Responsive Touch Cards) -->
-                        <div class="grid grid-cols-2 gap-2.5 sm:gap-3" id="posProductGrid">
-                            <!-- Item 1: Refill Only -->
-                            <button id="pos-card-refill" onclick="selectPosItem('refill', 'Isi Ulang Galon', 6000, this)" class="pos-item-card text-left p-3.5 sm:p-4 rounded-xl border-2 border-aqua-500 ring-2 ring-aqua-500 bg-aqua-50/40 hover:border-aqua-500 transition active:scale-95 flex flex-col justify-between group touch-manipulation min-h-[110px]">
-                                <div class="flex justify-between items-start w-full">
-                                    <span class="p-2 sm:p-2.5 bg-sky-100 text-sky-600 rounded-lg group-hover:scale-110 transition shrink-0"><i class="fa-solid fa-arrows-rotate text-base sm:text-lg"></i></span>
-                                    <span class="font-bold text-slate-900 text-xs sm:text-base">Rp 6.000</span>
-                                </div>
-                                <div class="mt-2 sm:mt-3">
-                                    <h4 class="font-semibold text-slate-800 text-xs sm:text-sm leading-tight">Isi Ulang Saja</h4>
-                                    <p class="text-[10px] sm:text-xs text-slate-500 mt-0.5 line-clamp-1">Bawa galon sendiri</p>
-                                </div>
-                            </button>
-
-                            <!-- Item 2: Buy New Gallon + Refill -->
-                            <button id="pos-card-new_gallon" onclick="selectPosItem('new_gallon', 'Galon Baru + Isi', 55000, this)" class="pos-item-card text-left p-3.5 sm:p-4 rounded-xl border-2 border-slate-100 hover:border-aqua-500 transition active:scale-95 flex flex-col justify-between group touch-manipulation min-h-[110px]">
-                                <div class="flex justify-between items-start w-full">
-                                    <span class="p-2 sm:p-2.5 bg-emerald-100 text-emerald-600 rounded-lg group-hover:scale-110 transition shrink-0"><i class="fa-solid fa-bottle-water text-base sm:text-lg"></i></span>
-                                    <span class="font-bold text-slate-900 text-xs sm:text-base">Rp 55.000</span>
-                                </div>
-                                <div class="mt-2 sm:mt-3">
-                                    <h4 class="font-semibold text-slate-800 text-xs sm:text-sm leading-tight">Galon Baru + Isi</h4>
-                                    <p class="text-[10px] sm:text-xs text-slate-500 mt-0.5 line-clamp-1">Beli galon fisik baru</p>
-                                </div>
-                            </button>
-
-                            <!-- Item 3: Aqua Asli -->
-                            <button id="pos-card-aqua_asli" onclick="selectPosItem('aqua_asli', 'Aqua Asli', 22000, this)" class="pos-item-card text-left p-3.5 sm:p-4 rounded-xl border-2 border-slate-100 hover:border-aqua-500 transition active:scale-95 flex flex-col justify-between group touch-manipulation min-h-[110px]">
-                                <div class="flex justify-between items-start w-full">
-                                    <span class="p-2 sm:p-2.5 bg-blue-100 text-blue-600 rounded-lg group-hover:scale-110 transition shrink-0"><i class="fa-solid fa-faucet-drip text-base sm:text-lg"></i></span>
-                                    <span class="font-bold text-slate-900 text-xs sm:text-base">Rp 22.000</span>
-                                </div>
-                                <div class="mt-2 sm:mt-3">
-                                    <h4 class="font-semibold text-slate-800 text-xs sm:text-sm leading-tight">Aqua Asli</h4>
-                                    <p class="text-[10px] sm:text-xs text-slate-500 mt-0.5 line-clamp-1">Kemasan pabrik asli</p>
-                                </div>
-                            </button>
-
-                            <!-- Item 4: Gallon Loan / Deposit -->
-                            <button id="pos-card-loan" onclick="selectPosItem('loan', 'Pinjam Galon Depot', 0, this)" class="pos-item-card text-left p-3.5 sm:p-4 rounded-xl border-2 border-slate-100 hover:border-aqua-500 transition active:scale-95 flex flex-col justify-between group touch-manipulation min-h-[110px]">
-                                <div class="flex justify-between items-start w-full">
-                                    <span class="p-2 sm:p-2.5 bg-amber-100 text-amber-600 rounded-lg group-hover:scale-110 transition shrink-0"><i class="fa-solid fa-handshake text-base sm:text-lg"></i></span>
-                                    <span class="font-bold text-slate-900 text-xs sm:text-base">Rp 0</span>
-                                </div>
-                                <div class="mt-2 sm:mt-3">
-                                    <h4 class="font-semibold text-slate-800 text-xs sm:text-sm leading-tight">Pinjam Galon</h4>
-                                    <p class="text-[10px] sm:text-xs text-slate-500 mt-0.5 line-clamp-1">Pinjam galon depot</p>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Customer Select -->
-                    <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200/80">
-                        <div class="flex justify-between items-center mb-2.5 sm:mb-3">
-                            <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Profil Pelanggan</label>
-                            <button onclick="openModal('addCustomerModal')" class="text-xs text-aqua-600 font-semibold hover:underline flex items-center gap-1 active:scale-95">
-                                <i class="fa-solid fa-user-plus"></i> + Pelanggan Baru
-                            </button>
-                        </div>
-                        <select id="posCustomerSelect" onchange="updatePosCustomerInfo()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-aqua-500">
-                            <option value="walkin">Pelanggan Umum (Tunai Langsung)</option>
-                            <!-- Dynamic options -->
-                        </select>
-                        <div id="posCustomerDetail" class="hidden mt-3 p-3 bg-slate-50 rounded-xl border border-slate-100 text-xs text-slate-600 flex flex-wrap justify-between gap-2">
-                            <span>WA: <b id="posCustPhone">-</b></span>
-                            <span>Bon: <b id="posCustTab" class="text-red-600">Rp 0</b></span>
-                            <span>Pinjam: <b id="posCustGallons">0 unit</b></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column: Cart & Payment Checkout -->
-                <div class="lg:col-span-5">
-                    <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200/80 sticky top-20 space-y-3.5 sm:space-y-4">
-                        <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-                            <h3 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
-                                <i class="fa-solid fa-cart-shopping text-aqua-600"></i> Keranjang Transaksi
-                            </h3>
-                            <button onclick="resetCart()" class="text-xs text-red-500 font-medium hover:underline active:scale-95">Reset</button>
-                        </div>
-
-                        <!-- Selected Item Banner -->
-                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-100">
-                            <div class="flex justify-between items-center">
-                                <span id="cartItemTitle" class="font-semibold text-slate-800 text-xs sm:text-sm truncate">Isi Ulang Galon</span>
-                                <span id="cartUnitPrice" class="text-xs font-bold text-slate-500 shrink-0 ml-2">Rp 6.000 / unit</span>
-                            </div>
-
-                            <!-- Touch-Friendly Quantity Counter -->
-                            <div class="flex items-center justify-between mt-3.5">
-                                <span class="text-xs font-medium text-slate-500">Jumlah Galon</span>
-                                <div class="flex items-center space-x-2">
-                                    <button onclick="changePosQty(-1)" class="w-11 h-11 sm:w-9 sm:h-9 rounded-xl bg-white border border-slate-200 text-slate-800 font-bold hover:bg-slate-100 active:scale-90 shadow-sm flex items-center justify-center text-lg sm:text-base touch-manipulation">-</button>
-                                    <input type="number" id="cartQtyInput" min="1" value="1" oninput="calculatePosTotal()" class="w-16 text-center border border-slate-200 rounded-xl py-2 font-bold text-slate-900 text-sm sm:text-base bg-white">
-                                    <button onclick="changePosQty(1)" class="w-11 h-11 sm:w-9 sm:h-9 rounded-xl bg-white border border-slate-200 text-slate-800 font-bold hover:bg-slate-100 active:scale-90 shadow-sm flex items-center justify-center text-lg sm:text-base touch-manipulation">+</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Auto Stock Deduction Note -->
-                        <div class="p-2.5 sm:p-3 bg-sky-50 rounded-xl text-sky-800 text-[11px] sm:text-xs flex items-center gap-2">
-                            <i class="fa-solid fa-circle-info text-sky-500 shrink-0"></i>
-                            <span>Mengurangi <b id="cartCapDeduct">1</b> Tutup & <b id="cartTissueDeduct">1</b> Tisu.</span>
-                        </div>
-
-                        <!-- Payment Method Picker -->
-                        <div class="space-y-2">
-                            <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Metode Pembayaran</label>
-                            <div class="grid grid-cols-3 gap-2">
-                                <button type="button" onclick="setPaymentMethod('cash')" id="payBtn-cash" class="pay-method-btn p-2.5 sm:p-3 text-center border-2 border-aqua-500 bg-aqua-50/50 text-aqua-700 rounded-xl text-xs font-bold transition active:scale-95 touch-manipulation">
-                                    <i class="fa-solid fa-money-bill-wave text-sm sm:text-base block mb-0.5"></i> Tunai
-                                </button>
-                                <button type="button" onclick="setPaymentMethod('qris')" id="payBtn-qris" class="pay-method-btn p-2.5 sm:p-3 text-center border-2 border-slate-200 text-slate-600 rounded-xl text-xs font-bold transition hover:border-slate-300 active:scale-95 touch-manipulation">
-                                    <i class="fa-solid fa-qrcode text-sm sm:text-base block mb-0.5"></i> QRIS
-                                </button>
-                                <button type="button" onclick="setPaymentMethod('tab')" id="payBtn-tab" class="pay-method-btn p-2.5 sm:p-3 text-center border-2 border-slate-200 text-slate-600 rounded-xl text-xs font-bold transition hover:border-slate-300 active:scale-95 touch-manipulation">
-                                    <i class="fa-solid fa-book-bookmark text-sm sm:text-base block mb-0.5"></i> Bon / Piutang
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Order Summary Total -->
-                        <div class="pt-2 sm:pt-3 border-t border-slate-100 space-y-1">
-                            <div class="flex justify-between text-xs text-slate-500">
-                                <span>Subtotal</span>
-                                <span id="cartSubtotal">Rp 6.000</span>
-                            </div>
-                            <div class="flex justify-between text-base sm:text-lg font-extrabold text-slate-900 pt-1">
-                                <span>Total Bayar</span>
-                                <span id="cartTotal" class="text-emerald-600">Rp 6.000</span>
-                            </div>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <button onclick="processCheckout()" class="w-full bg-gradient-to-r from-aqua-600 to-teal-600 hover:from-aqua-700 hover:to-teal-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-aqua-500/20 active:scale-95 transition flex items-center justify-center space-x-2 text-sm sm:text-base touch-manipulation">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <span>Selesaikan Transaksi</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PIUTANG & TANGGUNGAN PELANGGAN SECTION -->
+        <!-- 3. PIUTANG & TANGGUNGAN PELANGGAN SECTION -->
         <section id="view-receivables" class="tab-content hidden space-y-4 sm:space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-sm">
                 <div>
@@ -503,7 +499,7 @@
             </div>
         </section>
 
-        <!-- STOK GALON & BAHAN BAKU SECTION -->
+        <!-- 4. STOK GALON & BAHAN BAKU SECTION -->
         <section id="view-inventory" class="tab-content hidden space-y-4 sm:space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <!-- Physical Gallon Inventory Card -->
@@ -512,7 +508,7 @@
                         <h2 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
                             <i class="fa-solid fa-bottle-water text-aqua-600"></i> Stok Galon Fisik
                         </h2>
-                        <button onclick="openModal('adjustGallonModal')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-3 py-1.5 rounded-lg active:scale-95">Audit Stok</button>
+                        <button onclick="openModal('adjustGallonModal')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-3 py-1.5 rounded-lg active:scale-95">Audit Galon</button>
                     </div>
 
                     <div class="grid grid-cols-3 gap-2 sm:gap-3">
@@ -545,7 +541,10 @@
                         <h2 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
                             <i class="fa-solid fa-box-open text-amber-600"></i> Stok Bahan Habis Pakai
                         </h2>
-                        <button onclick="openModal('restockConsumableModal')" class="text-xs bg-aqua-600 hover:bg-aqua-700 text-white font-medium px-3 py-1.5 rounded-lg active:scale-95">+ Restock Bahan</button>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="openModal('adjustConsumablesModal')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-2.5 py-1.5 rounded-lg active:scale-95">Audit Bahan</button>
+                            <button onclick="openModal('restockConsumableModal')" class="text-xs bg-aqua-600 hover:bg-aqua-700 text-white font-medium px-2.5 py-1.5 rounded-lg active:scale-95">+ Restock</button>
+                        </div>
                     </div>
 
                     <div class="space-y-2.5 sm:space-y-3" id="invConsumablesList">
@@ -555,7 +554,7 @@
             </div>
         </section>
 
-        <!-- PENGELUARAN & OPERASIONAL SECTION -->
+        <!-- 5. PENGELUARAN & OPERASIONAL SECTION -->
         <section id="view-expenses" class="tab-content hidden space-y-4 sm:space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-sm">
                 <div>
@@ -597,7 +596,7 @@
             </div>
         </section>
 
-        <!-- LAPORAN LABA RUGI (ADMIN) SECTION -->
+        <!-- 6. LAPORAN LABA RUGI (ADMIN) SECTION -->
         <section id="view-reports" class="tab-content hidden space-y-4 sm:space-y-6">
             <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                 <div>
@@ -633,7 +632,7 @@
                                 <span id="pnlRefillSales">Rp 0</span>
                             </div>
                             <div class="flex justify-between">
-                                <span>Penjualan Galon Baru & Lainnya</span>
+                                <span>Penjualan Galon Baru & Aqua Asli</span>
                                 <span id="pnlNewGallonSales">Rp 0</span>
                             </div>
                         </div>
@@ -685,7 +684,7 @@
 
     </main>
 
-    <!-- MODAL DIALOGS CONTAINER (MOBILE SCROLLING OPTIMIZED) -->
+    <!-- MODAL DIALOGS CONTAINER -->
 
     <!-- 1. Struk Transaksi Modal -->
     <div id="receiptModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
@@ -757,7 +756,7 @@
 
                 <div>
                     <label class="font-bold text-slate-700 block mb-1">Jumlah Biaya (Rp)</label>
-                    <input type="number" id="expAmount" placeholder="15000" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs font-bold text-slate-900">
+                    <input type="number" id="expAmount" min="1" placeholder="15000" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs font-bold text-slate-900">
                 </div>
 
                 <div class="pt-2 flex gap-2">
@@ -770,7 +769,7 @@
 
     <!-- 3. Raw Bulk Water Tanker Modal -->
     <div id="bulkWaterModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4 my-auto">
             <div class="flex justify-between items-center border-b border-slate-100 pb-3">
                 <h3 class="font-bold text-base text-slate-900 flex items-center gap-2">
                     <i class="fa-solid fa-truck-droplet text-sky-600"></i> Catat Air Tangki Baku
@@ -787,11 +786,11 @@
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Volume (Liter)</label>
-                        <input type="number" id="waterVolume" value="5000" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs">
+                        <input type="number" id="waterVolume" min="1" value="5000" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs">
                     </div>
                     <div>
                         <label class="font-bold text-slate-700 block mb-1">Total Biaya (Rp)</label>
-                        <input type="number" id="waterCost" value="350000" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-900">
+                        <input type="number" id="waterCost" min="0" value="350000" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-900">
                     </div>
                 </div>
 
@@ -805,7 +804,7 @@
 
     <!-- 4. Add New Customer Modal -->
     <div id="addCustomerModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4 my-auto">
             <div class="flex justify-between items-center border-b border-slate-100 pb-3">
                 <h3 class="font-bold text-base text-slate-900 flex items-center gap-2">
                     <i class="fa-solid fa-user-plus text-aqua-600"></i> Tambah Profil Pelanggan
@@ -839,7 +838,7 @@
 
     <!-- 5. Settlement / Payment Modal -->
     <div id="settlementModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4 my-auto">
             <div class="flex justify-between items-center border-b border-slate-100 pb-3">
                 <h3 class="font-bold text-base text-slate-900 flex items-center gap-2">
                     <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i> Pelunasan Bon / Tagihan
@@ -856,7 +855,7 @@
             <form onsubmit="processSettlement(event)" class="space-y-3 text-xs">
                 <div>
                     <label class="font-bold text-slate-700 block mb-1">Jumlah Pembayaran (Rp)</label>
-                    <input type="number" id="settleAmount" placeholder="0" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-900">
+                    <input type="number" id="settleAmount" min="1" placeholder="0" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-900">
                 </div>
 
                 <div class="pt-2 flex gap-2">
@@ -869,7 +868,7 @@
 
     <!-- 6. Adjust Physical Gallons Modal -->
     <div id="adjustGallonModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4 my-auto">
             <div class="flex justify-between items-center border-b border-slate-100 pb-3">
                 <h3 class="font-bold text-base text-slate-900 flex items-center gap-2">
                     <i class="fa-solid fa-bottle-water text-aqua-600"></i> Audit & Penyesuaian Galon
@@ -880,11 +879,11 @@
             <form onsubmit="saveGallonAdjustment(event)" class="space-y-3 text-xs">
                 <div>
                     <label class="font-bold text-slate-700 block mb-1">Galon Isi (Siap Jual)</label>
-                    <input type="number" id="adjFilled" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs">
+                    <input type="number" id="adjFilled" min="0" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs">
                 </div>
                 <div>
                     <label class="font-bold text-slate-700 block mb-1">Galon Kosong (Di Depot)</label>
-                    <input type="number" id="adjEmpty" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs">
+                    <input type="number" id="adjEmpty" min="0" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs">
                 </div>
 
                 <div class="pt-2 flex gap-2">
@@ -895,9 +894,41 @@
         </div>
     </div>
 
-    <!-- 7. Restock Consumables Modal -->
+    <!-- 7. Adjust Consumables Modal -->
+    <div id="adjustConsumablesModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4 my-auto">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-base text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-box-open text-amber-600"></i> Audit Stok Bahan Habis Pakai
+                </h3>
+                <button onclick="closeModal('adjustConsumablesModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <form onsubmit="saveConsumableAdjustment(event)" class="space-y-3 text-xs">
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Stok Tutup Galon (Pcs)</label>
+                    <input type="number" id="adjCaps" min="0" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs">
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Stok Tisu Sanitasi (Pcs)</label>
+                    <input type="number" id="adjTissues" min="0" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs">
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Stok Segel Plastik (Pcs)</label>
+                    <input type="number" id="adjSeals" min="0" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs">
+                </div>
+
+                <div class="pt-2 flex gap-2">
+                    <button type="button" onclick="closeModal('adjustConsumablesModal')" class="flex-1 bg-slate-100 text-slate-700 font-bold py-2.5 rounded-xl">Batal</button>
+                    <button type="submit" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl">Perbarui Stok Bahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 8. Restock Consumables Modal -->
     <div id="restockConsumableModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4 my-auto">
             <div class="flex justify-between items-center border-b border-slate-100 pb-3">
                 <h3 class="font-bold text-base text-slate-900 flex items-center gap-2">
                     <i class="fa-solid fa-box-open text-amber-600"></i> Restock Bahan Habis Pakai
@@ -916,11 +947,11 @@
                 </div>
                 <div>
                     <label class="font-bold text-slate-700 block mb-1">Jumlah Restock (Pcs)</label>
-                    <input type="number" id="restockQty" value="100" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs">
+                    <input type="number" id="restockQty" min="1" value="100" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs">
                 </div>
                 <div>
                     <label class="font-bold text-slate-700 block mb-1">Total Biaya Restock (Rp)</label>
-                    <input type="number" id="restockCost" value="50000" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-900">
+                    <input type="number" id="restockCost" min="0" value="50000" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-900">
                 </div>
                 <div class="pt-2 flex gap-2">
                     <button type="button" onclick="closeModal('restockConsumableModal')" class="flex-1 bg-slate-100 text-slate-700 font-bold py-2.5 rounded-xl">Batal</button>
@@ -930,7 +961,7 @@
         </div>
     </div>
 
-    <!-- 8. Password Modal for Pemilik Depot (Admin) -->
+    <!-- 9. Password Modal for Pemilik Depot (Admin) -->
     <div id="adminPasswordModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
         <div class="bg-white w-full max-w-sm rounded-2xl shadow-2xl p-5 sm:p-6 space-y-4 my-auto">
             <div class="flex justify-between items-center border-b border-slate-100 pb-3">
@@ -954,7 +985,7 @@
         </div>
     </div>
 
-    <!-- 9. Manual Data Reset Modal -->
+    <!-- 10. Manual Data Reset Modal -->
     <div id="resetDataModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
         <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-5 sm:p-6 space-y-4 my-auto max-h-[90vh] overflow-y-auto custom-scrollbar">
             <div class="flex justify-between items-center border-b border-slate-100 pb-3">
@@ -977,21 +1008,28 @@
                             <input type="radio" name="resetOption" value="transactions" checked class="mt-0.5 text-aqua-600 focus:ring-aqua-500">
                             <div>
                                 <span class="font-bold text-slate-800 block">Reset Transaksi & Pengeluaran</span>
-                                <span class="text-[10px] text-slate-500">Mengosongkan semua riwayat kasir, penjualan, dan pengeluaran.</span>
+                                <span class="text-[10px] text-slate-500">Mengosongkan semua riwayat kasir, penjualan, pengeluaran, serta saldo bon pelanggan.</span>
+                            </div>
+                        </label>
+                        <label class="flex items-start space-x-2.5 p-2.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition">
+                            <input type="radio" name="resetOption" value="receivables" class="mt-0.5 text-aqua-600 focus:ring-aqua-500">
+                            <div>
+                                <span class="font-bold text-slate-800 block">Reset Piutang & Pinjaman Galon</span>
+                                <span class="text-[10px] text-slate-500">Meng-nol-kan tagihan bon dan galon yang dipinjam semua pelanggan.</span>
                             </div>
                         </label>
                         <label class="flex items-start space-x-2.5 p-2.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition">
                             <input type="radio" name="resetOption" value="inventory" class="mt-0.5 text-aqua-600 focus:ring-aqua-500">
                             <div>
                                 <span class="font-bold text-slate-800 block">Reset Stok Galon & Bahan Baku</span>
-                                <span class="text-[10px] text-slate-500">Mengembalikan jumlah stok galon dan bahan ke standar awal.</span>
+                                <span class="text-[10px] text-slate-500">Mengembalikan jumlah stok galon dan bahan baku ke standar awal.</span>
                             </div>
                         </label>
                         <label class="flex items-start space-x-2.5 p-2.5 bg-rose-50/50 border border-rose-200 rounded-xl cursor-pointer hover:bg-rose-50 transition">
                             <input type="radio" name="resetOption" value="factory" class="mt-0.5 text-rose-600 focus:ring-rose-500">
                             <div>
                                 <span class="font-bold text-rose-900 block">Reset Total / Mode Pabrik (Factory Reset)</span>
-                                <span class="text-[10px] text-rose-700">Menghapus seluruh data lokal dan mengembalikan ke data awal demo.</span>
+                                <span class="text-[10px] text-rose-700">Menghapus seluruh data lokal (transaksi, pengeluaran, piutang bon, & stok).</span>
                             </div>
                         </label>
                     </div>
@@ -1012,11 +1050,12 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC (IN INDONESIAN) -->
+    <!-- JAVASCRIPT ENGINE -->
     <script>
-        // Storage Key & Initial Application State
-        const STORAGE_KEY = 'AQUAFLOW_DEPOT_DATA_ID_V2';
+        // Local Storage Identifier
+        const STORAGE_KEY = 'AQUAFLOW_DEPOT_DATA_ID_V3';
 
+        // Core Application State
         let appData = {
             currentRole: 'cashier',
             inventory: {
@@ -1053,19 +1092,29 @@
             customerId: 'walkin'
         };
 
+        let lastCompletedTx = null;
         let salesChartObj = null;
         let expenseChartObj = null;
 
-        // Currency Formatter Helper
-        function formatRupiah(number) {
-            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(number);
+        // Date Helper: Formats local YYYY-MM-DD to avoid UTC time zone discrepancies
+        function getLocalDateStr(dateObj = new Date()) {
+            const year = dateObj.getFullYear();
+            const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+            const day = String(dateObj.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
         }
 
-        // Initialization
+        // Currency Formatter Helper
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(number || 0);
+        }
+
+        // Lifecycle Entrypoint
         window.onload = function() {
             loadFromStorage();
             initCharts();
             applyRoleChange(appData.currentRole || 'cashier');
+            renderAllViews();
         };
 
         function saveToStorage() {
@@ -1085,7 +1134,6 @@
 
         function switchRole(role) {
             if (role === 'admin') {
-                // Prompt password for admin access
                 document.getElementById('adminPassInput').value = '';
                 openModal('adminPasswordModal');
                 setTimeout(() => document.getElementById('adminPassInput').focus(), 100);
@@ -1114,14 +1162,13 @@
             const adminNavs = document.querySelectorAll('.admin-only');
 
             if (role === 'cashier') {
-                cashierBtn.className = 'px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1.5 text-white bg-aqua-600 shadow-sm';
-                adminBtn.className = 'px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1.5 text-slate-300 hover:text-white bg-transparent';
+                cashierBtn.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-white bg-aqua-600 shadow-sm active:scale-95';
+                adminBtn.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-slate-300 hover:text-white bg-transparent active:scale-95';
                 adminNavs.forEach(el => el.classList.add('hidden'));
                 switchTab('pos');
-                showToast('Beralih ke Mode Kasir POS');
             } else {
-                adminBtn.className = 'px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1.5 text-white bg-aqua-600 shadow-sm';
-                cashierBtn.className = 'px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1.5 text-slate-300 hover:text-white bg-transparent';
+                adminBtn.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-white bg-aqua-600 shadow-sm active:scale-95';
+                cashierBtn.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-slate-300 hover:text-white bg-transparent active:scale-95';
                 adminNavs.forEach(el => el.classList.remove('hidden'));
                 switchTab('dashboard');
             }
@@ -1167,6 +1214,10 @@
             if (id === 'adjustGallonModal') {
                 document.getElementById('adjFilled').value = appData.inventory.filledGallons;
                 document.getElementById('adjEmpty').value = appData.inventory.emptyGallons;
+            } else if (id === 'adjustConsumablesModal') {
+                document.getElementById('adjCaps').value = appData.inventory.caps;
+                document.getElementById('adjTissues').value = appData.inventory.tissues;
+                document.getElementById('adjSeals').value = appData.inventory.seals;
             }
         }
 
@@ -1175,7 +1226,6 @@
             if (el) el.classList.add('hidden');
         }
 
-        /* MANUAL DATA RESET LOGIC */
         function openResetModal() {
             if (appData.currentRole !== 'admin') {
                 showToast('Hanya Pemilik Depot yang dapat mengakses fitur reset!', true);
@@ -1199,7 +1249,19 @@
             if (option === 'transactions') {
                 appData.transactions = [];
                 appData.expenses = [];
-                showToast('Riwayat Transaksi & Pengeluaran berhasil direset!');
+                appData.customers.forEach(c => {
+                    c.balance = 0;
+                    c.borrowedGallons = 0;
+                });
+                appData.inventory.borrowedGallons = 0;
+                showToast('Riwayat Transaksi, Pengeluaran & Bon berhasil direset!');
+            } else if (option === 'receivables') {
+                appData.customers.forEach(c => {
+                    c.balance = 0;
+                    c.borrowedGallons = 0;
+                });
+                appData.inventory.borrowedGallons = 0;
+                showToast('Seluruh Piutang & Pinjaman Galon Pelanggan berhasil direset!');
             } else if (option === 'inventory') {
                 appData.inventory = {
                     filledGallons: 100,
@@ -1209,23 +1271,26 @@
                     tissues: 500,
                     seals: 500
                 };
+                appData.customers.forEach(c => {
+                    c.borrowedGallons = 0;
+                });
                 showToast('Stok Galon & Bahan Baku berhasil direset ke standar!');
             } else if (option === 'factory') {
                 localStorage.removeItem(STORAGE_KEY);
                 appData = {
                     currentRole: 'admin',
                     inventory: {
-                        filledGallons: 120,
-                        emptyGallons: 45,
-                        borrowedGallons: 35,
-                        caps: 450,
-                        tissues: 320,
+                        filledGallons: 100,
+                        emptyGallons: 50,
+                        borrowedGallons: 0,
+                        caps: 500,
+                        tissues: 500,
                         seals: 500
                     },
                     customers: [
-                        { id: 'c1', name: 'Kios Segar Barokah', phone: '081234567890', address: 'Blok A-02', balance: 60000, borrowedGallons: 10 },
-                        { id: 'c2', name: 'Ibu Rahma', phone: '081987654321', address: 'Jl. Mawar No. 45', balance: 18000, borrowedGallons: 3 },
-                        { id: 'c3', name: 'Warung Makan Sederhana', phone: '081456789012', address: 'Kawasan Ruko 10', balance: 0, borrowedGallons: 5 }
+                        { id: 'c1', name: 'Kios Segar Barokah', phone: '081234567890', address: 'Blok A-02', balance: 0, borrowedGallons: 0 },
+                        { id: 'c2', name: 'Ibu Rahma', phone: '081987654321', address: 'Jl. Mawar No. 45', balance: 0, borrowedGallons: 0 },
+                        { id: 'c3', name: 'Warung Makan Sederhana', phone: '081456789012', address: 'Kawasan Ruko 10', balance: 0, borrowedGallons: 0 }
                     ],
                     transactions: [],
                     expenses: []
@@ -1233,24 +1298,22 @@
                 showToast('Sistem berhasil direset total ke Mode Pabrik!');
             }
 
+            resetCart();
             saveToStorage();
             renderAllViews();
             closeModal('resetDataModal');
         }
 
-        /* POS TERMINAL ENGINE */
         function selectPosItem(type, title, price, el) {
             activeCart.type = type;
             activeCart.title = title;
             activeCart.unitPrice = price;
 
-            // Remove active outline from all transaction cards
             document.querySelectorAll('.pos-item-card').forEach(card => {
                 card.classList.remove('border-aqua-500', 'ring-2', 'ring-aqua-500', 'bg-aqua-50/40');
                 card.classList.add('border-slate-100');
             });
 
-            // Apply blue outline & light blue highlight to active selection
             const targetEl = el || document.getElementById(`pos-card-${type}`);
             if (targetEl) {
                 targetEl.classList.remove('border-slate-100');
@@ -1317,6 +1380,8 @@
 
         function resetCart() {
             document.getElementById('cartQtyInput').value = 1;
+            document.getElementById('posCustomerSelect').value = 'walkin';
+            updatePosCustomerInfo();
             setPaymentMethod('cash');
             selectPosItem('refill', 'Isi Ulang Galon', 6000);
         }
@@ -1325,26 +1390,33 @@
             const qty = activeCart.qty;
             const total = qty * activeCart.unitPrice;
 
-            // Stock Check
-            if (appData.inventory.filledGallons < qty && activeCart.type !== 'loan') {
-                showToast('Stok Galon Isi tidak mencukupi!', true);
+            if (qty <= 0) {
+                showToast('Jumlah galon harus lebih dari 0!', true);
+                return;
+            }
+
+            // Inventory Validation
+            if (appData.inventory.filledGallons < qty) {
+                showToast('Stok Galon Isi tidak mencukupi untuk transaksi ini!', true);
                 return;
             }
 
             if (appData.inventory.caps < qty || appData.inventory.tissues < qty) {
-                showToast('Peringatan: Stok tutup/tisu galon hampir habis!', true);
+                showToast('Peringatan: Stok tutup/tisu galon hampir habis!');
             }
 
             let customerName = 'Pelanggan Umum';
+            let customerObj = null;
+
             if (activeCart.customerId !== 'walkin') {
-                const customer = appData.customers.find(c => c.id === activeCart.customerId);
-                if (customer) {
-                    customerName = customer.name;
+                customerObj = appData.customers.find(c => c.id === activeCart.customerId);
+                if (customerObj) {
+                    customerName = customerObj.name;
                     if (activeCart.paymentMethod === 'tab') {
-                        customer.balance += total;
+                        customerObj.balance += total;
                     }
                     if (activeCart.type === 'loan') {
-                        customer.borrowedGallons += qty;
+                        customerObj.borrowedGallons += qty;
                     }
                 }
             } else if (activeCart.paymentMethod === 'tab') {
@@ -1352,13 +1424,15 @@
                 return;
             }
 
-            // Deduct Stocks
-            if (activeCart.type !== 'loan') {
-                appData.inventory.filledGallons -= qty;
-                appData.inventory.emptyGallons += qty;
-            } else {
+            // Inventory Deduction Rules
+            if (activeCart.type === 'loan') {
                 appData.inventory.filledGallons -= qty;
                 appData.inventory.borrowedGallons += qty;
+            } else if (activeCart.type === 'new_gallon') {
+                appData.inventory.filledGallons -= qty; // Sold new filled gallon, empty gallons does not increase
+            } else { // refill or aqua_asli
+                appData.inventory.filledGallons -= qty;
+                appData.inventory.emptyGallons += qty;
             }
 
             appData.inventory.caps = Math.max(0, appData.inventory.caps - qty);
@@ -1374,14 +1448,16 @@
                 price: activeCart.unitPrice,
                 total: total,
                 paymentMethod: activeCart.paymentMethod,
-                customerName: customerName
+                customerName: customerName,
+                customerPhone: customerObj ? customerObj.phone : ''
             };
 
+            lastCompletedTx = newTx;
             appData.transactions.unshift(newTx);
             saveToStorage();
             renderAllViews();
 
-            // Prepare Receipt Modal
+            // Setup Printed Receipt Modal
             document.getElementById('recDateTime').innerText = new Date().toLocaleString('id-ID');
             document.getElementById('recCustomerName').innerText = customerName;
             document.getElementById('recPaymentMethod').innerText = activeCart.paymentMethod.toUpperCase();
@@ -1394,39 +1470,60 @@
         }
 
         function shareWhatsAppReceipt() {
-            showToast('Struk berhasil disimulasikan ke WhatsApp pelanggan!');
+            if (!lastCompletedTx) {
+                showToast('Tidak ada transaksi untuk dikirim!', true);
+                return;
+            }
+
+            const phone = lastCompletedTx.customerPhone ? lastCompletedTx.customerPhone.replace(/[^0-9]/g, '') : '';
+            const msg = `*AQUAFLOW DEPOT AIR*\n-----------------------------------\nTanggal: ${new Date(lastCompletedTx.date).toLocaleString('id-ID')}\nPelanggan: ${lastCompletedTx.customerName}\nPembayaran: ${lastCompletedTx.paymentMethod.toUpperCase()}\n-----------------------------------\n${lastCompletedTx.qty}x ${lastCompletedTx.itemDesc}\n*Total: ${formatRupiah(lastCompletedTx.total)}*\n-----------------------------------\nTerima kasih telah berlangganan di AquaFlow!`;
+
+            if (phone) {
+                window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+            } else {
+                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+            }
+            showToast('Struk WhatsApp disiapkan');
         }
 
         function renderAllViews() {
+            populateCustomerDropdown();
             renderDashboard();
             renderCustomers();
             renderInventory();
             renderExpenses();
-            populateCustomerDropdown();
+            renderPnLReport();
+            renderCharts();
         }
 
         function populateCustomerDropdown() {
             const select = document.getElementById('posCustomerSelect');
+            const currentVal = select.value;
             let html = `<option value="walkin">Pelanggan Umum (Tunai Langsung)</option>`;
             appData.customers.forEach(c => {
                 html += `<option value="${c.id}">${c.name} (${c.phone})</option>`;
             });
             select.innerHTML = html;
+            select.value = currentVal || 'walkin';
         }
 
         function renderDashboard() {
-            const todayStr = new Date().toISOString().split('T')[0];
-            const todayTxs = appData.transactions.filter(t => t.date.startsWith(todayStr));
+            const todayStr = getLocalDateStr(new Date());
+            const monthStr = getLocalDateStr(new Date()).slice(0, 7);
+
+            // Filter out settlement transactions from sales revenue
+            const productTxs = appData.transactions.filter(t => t.type !== 'settlement' && t.type !== 'loan');
+
+            const todayTxs = productTxs.filter(t => getLocalDateStr(new Date(t.date)) === todayStr);
             const todaySales = todayTxs.reduce((sum, t) => sum + t.total, 0);
 
-            const monthStr = new Date().toISOString().slice(0, 7);
-            const monthTxs = appData.transactions.filter(t => t.date.startsWith(monthStr));
+            const monthTxs = productTxs.filter(t => getLocalDateStr(new Date(t.date)).startsWith(monthStr));
             const monthSales = monthTxs.reduce((sum, t) => sum + t.total, 0);
 
             const totalReceivables = appData.customers.reduce((sum, c) => sum + c.balance, 0);
 
             document.getElementById('dashTodaySales').innerText = formatRupiah(todaySales);
-            document.getElementById('dashTodayCount').innerText = `${todayTxs.length} transaksi`;
+            document.getElementById('dashTodayCount').innerText = `${todayTxs.length} tx`;
             document.getElementById('dashMonthSales').innerText = formatRupiah(monthSales);
             document.getElementById('dashReceivables').innerText = formatRupiah(totalReceivables);
 
@@ -1436,7 +1533,7 @@
 
             document.getElementById('tab-receivable-badge').innerText = appData.customers.filter(c => c.balance > 0).length;
 
-            // Render Recent Sales Table
+            // Render Recent Transactions
             const recentTbody = document.getElementById('dashRecentSales');
             let recentHtml = '';
             appData.transactions.slice(0, 5).forEach(tx => {
@@ -1452,9 +1549,9 @@
                     </tr>
                 `;
             });
-            recentTbody.innerHTML = recentHtml || '<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada transaksi recorded</td></tr>';
+            recentTbody.innerHTML = recentHtml || '<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada transaksi dicatat</td></tr>';
 
-            // Consumables Widget
+            // Render Consumables Widget
             const consumablesBox = document.getElementById('dashConsumablesList');
             consumablesBox.innerHTML = `
                 <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl text-xs">
@@ -1509,6 +1606,11 @@
             const amt = parseFloat(document.getElementById('settleAmount').value) || 0;
             const customer = appData.customers.find(c => c.id === custId);
 
+            if (amt <= 0) {
+                showToast('Jumlah pembayaran harus lebih dari 0!', true);
+                return;
+            }
+
             if (customer) {
                 customer.balance = Math.max(0, customer.balance - amt);
 
@@ -1521,13 +1623,14 @@
                     price: amt,
                     total: amt,
                     paymentMethod: 'cash',
-                    customerName: customer.name
+                    customerName: customer.name,
+                    customerPhone: customer.phone
                 });
 
                 saveToStorage();
                 renderAllViews();
                 closeModal('settlementModal');
-                showToast(`Dicatat pembayar bon ${formatRupiah(amt)} dari ${customer.name}`);
+                showToast(`Dicatat pembayaran bon ${formatRupiah(amt)} dari ${customer.name}`);
             }
         }
 
@@ -1567,8 +1670,8 @@
 
         function saveGallonAdjustment(e) {
             e.preventDefault();
-            appData.inventory.filledGallons = parseInt(document.getElementById('adjFilled').value) || 0;
-            appData.inventory.emptyGallons = parseInt(document.getElementById('adjEmpty').value) || 0;
+            appData.inventory.filledGallons = Math.max(0, parseInt(document.getElementById('adjFilled').value) || 0);
+            appData.inventory.emptyGallons = Math.max(0, parseInt(document.getElementById('adjEmpty').value) || 0);
 
             saveToStorage();
             renderAllViews();
@@ -1576,11 +1679,23 @@
             showToast('Audit stok galon fisik berhasil diperbarui!');
         }
 
+        function saveConsumableAdjustment(e) {
+            e.preventDefault();
+            appData.inventory.caps = Math.max(0, parseInt(document.getElementById('adjCaps').value) || 0);
+            appData.inventory.tissues = Math.max(0, parseInt(document.getElementById('adjTissues').value) || 0);
+            appData.inventory.seals = Math.max(0, parseInt(document.getElementById('adjSeals').value) || 0);
+
+            saveToStorage();
+            renderAllViews();
+            closeModal('adjustConsumablesModal');
+            showToast('Audit stok bahan habis pakai berhasil diperbarui!');
+        }
+
         function saveConsumableRestock(e) {
             e.preventDefault();
             const key = document.getElementById('restockItemKey').value;
-            const qty = parseInt(document.getElementById('restockQty').value) || 0;
-            const cost = parseFloat(document.getElementById('restockCost').value) || 0;
+            const qty = Math.max(1, parseInt(document.getElementById('restockQty').value) || 0);
+            const cost = Math.max(0, parseFloat(document.getElementById('restockCost').value) || 0);
 
             if (appData.inventory[key] !== undefined) {
                 appData.inventory[key] += qty;
@@ -1628,7 +1743,7 @@
             e.preventDefault();
             const cat = document.getElementById('expCategory').value;
             const desc = document.getElementById('expDesc').value;
-            const amt = parseFloat(document.getElementById('expAmount').value) || 0;
+            const amt = Math.max(1, parseFloat(document.getElementById('expAmount').value) || 0);
 
             appData.expenses.unshift({
                 id: 'ex-' + Date.now().toString().slice(-5),
@@ -1648,8 +1763,8 @@
         function saveBulkWaters(e) {
             e.preventDefault();
             const supplier = document.getElementById('waterSupplier').value;
-            const volume = parseInt(document.getElementById('waterVolume').value) || 0;
-            const cost = parseFloat(document.getElementById('waterCost').value) || 0;
+            const volume = Math.max(1, parseInt(document.getElementById('waterVolume').value) || 0);
+            const cost = Math.max(0, parseFloat(document.getElementById('waterCost').value) || 0);
 
             appData.expenses.unshift({
                 id: 'ex-' + Date.now().toString().slice(-5),
@@ -1688,22 +1803,21 @@
             showToast(`Pelanggan ${name} berhasil ditambahkan`);
         }
 
-        /* P&L REPORT GENERATOR */
         function renderPnLReport() {
             const filter = document.getElementById('reportMonthFilter').value;
-            const monthStr = new Date().toISOString().slice(0, 7);
+            const monthStr = getLocalDateStr(new Date()).slice(0, 7);
 
-            let txs = appData.transactions;
+            let txs = appData.transactions.filter(t => t.type !== 'settlement' && t.type !== 'loan');
             let exps = appData.expenses;
 
             if (filter === 'current') {
-                txs = txs.filter(t => t.date.startsWith(monthStr));
-                exps = exps.filter(e => e.date.startsWith(monthStr));
+                txs = txs.filter(t => getLocalDateStr(new Date(t.date)).startsWith(monthStr));
+                exps = exps.filter(e => getLocalDateStr(new Date(e.date)).startsWith(monthStr));
             }
 
             const refillSales = txs.filter(t => t.type === 'refill').reduce((sum, t) => sum + t.total, 0);
-            const newGallonSales = txs.filter(t => t.type === 'new_gallon').reduce((sum, t) => sum + t.total, 0);
-            const totalRevenue = txs.reduce((sum, t) => sum + t.total, 0);
+            const newGallonSales = txs.filter(t => t.type === 'new_gallon' || t.type === 'aqua_asli').reduce((sum, t) => sum + t.total, 0);
+            const totalRevenue = refillSales + newGallonSales;
 
             const bulkWaterCosts = exps.filter(e => e.category === 'Pembelian Air Tangki').reduce((sum, e) => sum + e.amount, 0);
             const consumableCosts = exps.filter(e => e.category === 'Restok Tutup & Tisu').reduce((sum, e) => sum + e.amount, 0);
@@ -1747,21 +1861,20 @@
             const netEl = document.getElementById('pnlNetProfit');
             netEl.innerText = formatRupiah(netProfit);
             netEl.parentElement.className = netProfit >= 0 ?
-                'p-4 bg-emerald-500 text-white rounded-xl flex justify-between font-extrabold text-base shadow-lg shadow-emerald-500/20' :
-                'p-4 bg-red-500 text-white rounded-xl flex justify-between font-extrabold text-base shadow-lg shadow-red-500/20';
+                'p-3.5 sm:p-4 bg-emerald-500 text-white rounded-xl flex justify-between font-extrabold text-sm sm:text-base shadow-lg shadow-emerald-500/20' :
+                'p-3.5 sm:p-4 bg-red-500 text-white rounded-xl flex justify-between font-extrabold text-sm sm:text-base shadow-lg shadow-red-500/20';
         }
 
-        /* CHART.JS RENDERER */
         function initCharts() {
             const ctxSales = document.getElementById('salesChart').getContext('2d');
             salesChartObj = new Chart(ctxSales, {
                 type: 'line',
                 data: {
-                    labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
+                    labels: [],
                     datasets: [
                         {
                             label: 'Penjualan (Rp)',
-                            data: [120000, 180000, 150000, 210000, 270000, 320000, 250000],
+                            data: [],
                             borderColor: '#0284c7',
                             backgroundColor: 'rgba(2, 132, 199, 0.1)',
                             fill: true,
@@ -1769,7 +1882,7 @@
                         },
                         {
                             label: 'Pengeluaran (Rp)',
-                            data: [35000, 50000, 25000, 350000, 40000, 60000, 30000],
+                            data: [],
                             borderColor: '#ef4444',
                             borderDash: [5, 5],
                             fill: false,
@@ -1788,10 +1901,10 @@
             expenseChartObj = new Chart(ctxExpense, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Air Tangki Baku', 'Listrik PLN', 'Bensin Kurir', 'Perawatan UV/Filter'],
+                    labels: [],
                     datasets: [{
-                        data: [350000, 250000, 80000, 120000],
-                        backgroundColor: ['#0284c7', '#f59e0b', '#10b981', '#8b5cf6']
+                        data: [],
+                        backgroundColor: ['#0284c7', '#f59e0b', '#10b981', '#8b5cf6', '#ec4899', '#6366f1']
                     }]
                 },
                 options: {
@@ -1803,8 +1916,49 @@
         }
 
         function renderCharts() {
-            if (salesChartObj) salesChartObj.update();
-            if (expenseChartObj) expenseChartObj.update();
+            if (!salesChartObj || !expenseChartObj) return;
+
+            const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+            const today = new Date();
+            const last7DaysLabels = [];
+            const salesData = [0, 0, 0, 0, 0, 0, 0];
+            const expenseData = [0, 0, 0, 0, 0, 0, 0];
+
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date();
+                d.setDate(today.getDate() - i);
+                last7DaysLabels.push(days[d.getDay()]);
+
+                const dateStr = getLocalDateStr(d);
+                salesData[6 - i] = appData.transactions
+                    .filter(t => t.type !== 'settlement' && t.type !== 'loan' && getLocalDateStr(new Date(t.date)) === dateStr)
+                    .reduce((sum, t) => sum + t.total, 0);
+                expenseData[6 - i] = appData.expenses
+                    .filter(e => getLocalDateStr(new Date(e.date)) === dateStr)
+                    .reduce((sum, e) => sum + e.amount, 0);
+            }
+
+            salesChartObj.data.labels = last7DaysLabels;
+            salesChartObj.data.datasets[0].data = salesData;
+            salesChartObj.data.datasets[1].data = expenseData;
+            salesChartObj.update();
+
+            const expenseCatMap = {};
+            appData.expenses.forEach(ex => {
+                expenseCatMap[ex.category] = (expenseCatMap[ex.category] || 0) + ex.amount;
+            });
+
+            const expLabels = Object.keys(expenseCatMap);
+            const expValues = Object.values(expenseCatMap);
+
+            if (expLabels.length === 0) {
+                expenseChartObj.data.labels = ['Belum ada data'];
+                expenseChartObj.data.datasets[0].data = [0];
+            } else {
+                expenseChartObj.data.labels = expLabels;
+                expenseChartObj.data.datasets[0].data = expValues;
+            }
+            expenseChartObj.update();
         }
     </script>
 </body>
