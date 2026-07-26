@@ -108,6 +108,12 @@
                         <i class="fa-solid fa-bolt text-amber-400"></i>
                         <span class="hidden md:inline">+ Pengeluaran Cepat</span>
                     </button>
+
+                    <!-- Manual Reset Button (Admin Only) -->
+                    <button onclick="openResetModal()" class="admin-only hidden bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 p-2 sm:px-3 sm:py-1.5 rounded-xl text-xs font-semibold flex items-center space-x-1.5 transition active:scale-95" title="Reset Data Manual">
+                        <i class="fa-solid fa-rotate-left text-rose-400"></i>
+                        <span class="hidden md:inline">Reset Data</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -948,6 +954,64 @@
         </div>
     </div>
 
+    <!-- 9. Manual Data Reset Modal -->
+    <div id="resetDataModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-5 sm:p-6 space-y-4 my-auto max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-sm sm:text-base text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-triangle-exclamation text-rose-500"></i> Reset Data Depot Manual
+                </h3>
+                <button onclick="closeModal('resetDataModal')" class="text-slate-400 hover:text-slate-600 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <form onsubmit="executeManualReset(event)" class="space-y-3.5 text-xs">
+                <div class="p-3 bg-rose-50 rounded-xl border border-rose-100 text-rose-800 text-xs">
+                    <p class="font-semibold mb-1"><i class="fa-solid fa-circle-info mr-1"></i> Pilih Opsi Reset:</p>
+                    <p class="text-[11px] text-rose-700">Tindakan ini akan memperbarui atau mengosongkan data sesuai pilihan Anda.</p>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="font-bold text-slate-700 block">Tipe Reset Data</label>
+                    <div class="space-y-2">
+                        <label class="flex items-start space-x-2.5 p-2.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition">
+                            <input type="radio" name="resetOption" value="transactions" checked class="mt-0.5 text-aqua-600 focus:ring-aqua-500">
+                            <div>
+                                <span class="font-bold text-slate-800 block">Reset Transaksi & Pengeluaran</span>
+                                <span class="text-[10px] text-slate-500">Mengosongkan semua riwayat kasir, penjualan, dan pengeluaran.</span>
+                            </div>
+                        </label>
+                        <label class="flex items-start space-x-2.5 p-2.5 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition">
+                            <input type="radio" name="resetOption" value="inventory" class="mt-0.5 text-aqua-600 focus:ring-aqua-500">
+                            <div>
+                                <span class="font-bold text-slate-800 block">Reset Stok Galon & Bahan Baku</span>
+                                <span class="text-[10px] text-slate-500">Mengembalikan jumlah stok galon dan bahan ke standar awal.</span>
+                            </div>
+                        </label>
+                        <label class="flex items-start space-x-2.5 p-2.5 bg-rose-50/50 border border-rose-200 rounded-xl cursor-pointer hover:bg-rose-50 transition">
+                            <input type="radio" name="resetOption" value="factory" class="mt-0.5 text-rose-600 focus:ring-rose-500">
+                            <div>
+                                <span class="font-bold text-rose-900 block">Reset Total / Mode Pabrik (Factory Reset)</span>
+                                <span class="text-[10px] text-rose-700">Menghapus seluruh data lokal dan mengembalikan ke data awal demo.</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">PIN Pemilik (Keamanan)</label>
+                    <input type="password" id="resetPinInput" placeholder="Masukkan PIN: 5546" required maxlength="10" inputmode="numeric" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-center text-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500">
+                </div>
+
+                <div class="pt-2 flex gap-2">
+                    <button type="button" onclick="closeModal('resetDataModal')" class="flex-1 bg-slate-100 text-slate-700 font-bold py-3 rounded-xl active:scale-95">Batal</button>
+                    <button type="submit" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl active:scale-95 flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-rotate-left"></i> Jalankan Reset
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- JAVASCRIPT LOGIC (IN INDONESIAN) -->
     <script>
         // Storage Key & Initial Application State
@@ -1109,6 +1173,69 @@
         function closeModal(id) {
             const el = document.getElementById(id);
             if (el) el.classList.add('hidden');
+        }
+
+        /* MANUAL DATA RESET LOGIC */
+        function openResetModal() {
+            if (appData.currentRole !== 'admin') {
+                showToast('Hanya Pemilik Depot yang dapat mengakses fitur reset!', true);
+                return;
+            }
+            document.getElementById('resetPinInput').value = '';
+            openModal('resetDataModal');
+        }
+
+        function executeManualReset(e) {
+            e.preventDefault();
+            const pin = document.getElementById('resetPinInput').value;
+
+            if (pin !== '5546') {
+                showToast('PIN Pemilik Salah! Gunakan kode 5546', true);
+                return;
+            }
+
+            const option = document.querySelector('input[name="resetOption"]:checked').value;
+
+            if (option === 'transactions') {
+                appData.transactions = [];
+                appData.expenses = [];
+                showToast('Riwayat Transaksi & Pengeluaran berhasil direset!');
+            } else if (option === 'inventory') {
+                appData.inventory = {
+                    filledGallons: 100,
+                    emptyGallons: 50,
+                    borrowedGallons: 0,
+                    caps: 500,
+                    tissues: 500,
+                    seals: 500
+                };
+                showToast('Stok Galon & Bahan Baku berhasil direset ke standar!');
+            } else if (option === 'factory') {
+                localStorage.removeItem(STORAGE_KEY);
+                appData = {
+                    currentRole: 'admin',
+                    inventory: {
+                        filledGallons: 120,
+                        emptyGallons: 45,
+                        borrowedGallons: 35,
+                        caps: 450,
+                        tissues: 320,
+                        seals: 500
+                    },
+                    customers: [
+                        { id: 'c1', name: 'Kios Segar Barokah', phone: '081234567890', address: 'Blok A-02', balance: 60000, borrowedGallons: 10 },
+                        { id: 'c2', name: 'Ibu Rahma', phone: '081987654321', address: 'Jl. Mawar No. 45', balance: 18000, borrowedGallons: 3 },
+                        { id: 'c3', name: 'Warung Makan Sederhana', phone: '081456789012', address: 'Kawasan Ruko 10', balance: 0, borrowedGallons: 5 }
+                    ],
+                    transactions: [],
+                    expenses: []
+                };
+                showToast('Sistem berhasil direset total ke Mode Pabrik!');
+            }
+
+            saveToStorage();
+            renderAllViews();
+            closeModal('resetDataModal');
         }
 
         /* POS TERMINAL ENGINE */
