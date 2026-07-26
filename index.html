@@ -1025,6 +1025,13 @@
                                 <span class="text-[10px] text-slate-500">Mengembalikan jumlah stok galon dan bahan baku ke standar awal.</span>
                             </div>
                         </label>
+                        <label class="flex items-start space-x-2.5 p-2.5 bg-sky-50/60 border border-sky-200 rounded-xl cursor-pointer hover:bg-sky-50 transition">
+                            <input type="radio" name="resetOption" value="demo" class="mt-0.5 text-sky-600 focus:ring-sky-500">
+                            <div>
+                                <span class="font-bold text-sky-900 block">Muat Data Demo / Simulasi</span>
+                                <span class="text-[10px] text-sky-700">Isi data contoh transaksi, pengeluaran & bon untuk ujicoba fitur.</span>
+                            </div>
+                        </label>
                         <label class="flex items-start space-x-2.5 p-2.5 bg-rose-50/50 border border-rose-200 rounded-xl cursor-pointer hover:bg-rose-50 transition">
                             <input type="radio" name="resetOption" value="factory" class="mt-0.5 text-rose-600 focus:ring-rose-500">
                             <div>
@@ -1055,32 +1062,23 @@
         // Local Storage Identifier
         const STORAGE_KEY = 'AQUAFLOW_DEPOT_DATA_ID_V3';
 
-        // Core Application State
-        let appData = {
+        // Core Application Default Template (Clean Business State with Empty Customer List)
+        const DEFAULT_APP_DATA = {
             currentRole: 'cashier',
             inventory: {
-                filledGallons: 120,
-                emptyGallons: 45,
-                borrowedGallons: 35,
-                caps: 450,
-                tissues: 320,
+                filledGallons: 100,
+                emptyGallons: 50,
+                borrowedGallons: 0,
+                caps: 500,
+                tissues: 500,
                 seals: 500
             },
-            customers: [
-                { id: 'c1', name: 'Kios Segar Barokah', phone: '081234567890', address: 'Blok A-02', balance: 60000, borrowedGallons: 10 },
-                { id: 'c2', name: 'Ibu Rahma', phone: '081987654321', address: 'Jl. Mawar No. 45', balance: 18000, borrowedGallons: 3 },
-                { id: 'c3', name: 'Warung Makan Sederhana', phone: '081456789012', address: 'Kawasan Ruko 10', balance: 0, borrowedGallons: 5 }
-            ],
-            transactions: [
-                { id: 'tx-101', date: new Date().toISOString(), type: 'refill', itemDesc: 'Isi Ulang Galon', qty: 5, price: 6000, total: 30000, paymentMethod: 'cash', customerName: 'Pelanggan Umum' },
-                { id: 'tx-102', date: new Date().toISOString(), type: 'new_gallon', itemDesc: 'Galon Baru + Isi', qty: 1, price: 55000, total: 55000, paymentMethod: 'qris', customerName: 'Ibu Rahma' },
-                { id: 'tx-103', date: new Date().toISOString(), type: 'refill', itemDesc: 'Isi Ulang Galon', qty: 10, price: 6000, total: 60000, paymentMethod: 'tab', customerName: 'Kios Segar Barokah' }
-            ],
-            expenses: [
-                { id: 'ex-201', date: new Date().toISOString(), category: 'Listrik & PLN', desc: 'Tagihan Listrik Depot Bulan Ini', loggedBy: 'Admin', amount: 250000 },
-                { id: 'ex-202', date: new Date().toISOString(), category: 'Pembelian Air Tangki', desc: 'Air Baku Tangki Pegunungan 5.000L', loggedBy: 'Admin', amount: 350000 }
-            ]
+            customers: [],
+            transactions: [],
+            expenses: []
         };
+
+        let appData = JSON.parse(JSON.stringify(DEFAULT_APP_DATA));
 
         // Active Cart State
         let activeCart = {
@@ -1095,6 +1093,118 @@
         let lastCompletedTx = null;
         let salesChartObj = null;
         let expenseChartObj = null;
+
+        function showToast(msg, isError = false) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            const toastIcon = document.getElementById('toastIcon');
+            if (!toast || !toastMsg) return;
+
+            toastMsg.innerText = msg;
+            if (isError) {
+                toastIcon.className = 'fa-solid fa-circle-xmark text-rose-400 text-lg shrink-0';
+            } else {
+                toastIcon.className = 'fa-solid fa-circle-check text-emerald-400 text-lg shrink-0';
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        function openModal(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('hidden');
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(`view-${tabId}`);
+            if (target) target.classList.remove('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-aqua-500', 'text-white');
+                btn.classList.add('border-transparent');
+            });
+
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('border-transparent');
+                activeBtn.classList.add('border-aqua-500', 'text-white');
+            }
+
+            if (tabId === 'dashboard') {
+                renderCharts();
+            }
+        }
+
+        function switchRole(role) {
+            if (role === 'admin') {
+                if (appData.currentRole === 'admin') {
+                    applyRoleChange('admin');
+                    return;
+                }
+                document.getElementById('adminPassInput').value = '';
+                openModal('adminPasswordModal');
+            } else {
+                applyRoleChange('cashier');
+                showToast('Beralih ke Mode Kasir');
+            }
+        }
+
+        function verifyAdminPassword(e) {
+            e.preventDefault();
+            const pin = document.getElementById('adminPassInput').value;
+            if (pin === '5546') {
+                closeModal('adminPasswordModal');
+                applyRoleChange('admin');
+                showToast('Berhasil masuk sebagai Pemilik Depot');
+            } else {
+                showToast('PIN Pemilik Salah! Gunakan kode 5546', true);
+            }
+        }
+
+        function applyRoleChange(role) {
+            appData.currentRole = role;
+            saveToStorage();
+
+            const cashierBtn = document.getElementById('roleCashierBtn');
+            const adminBtn = document.getElementById('roleAdminBtn');
+            const adminElements = document.querySelectorAll('.admin-only');
+
+            if (role === 'admin') {
+                cashierBtn.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-slate-300 hover:text-white active:scale-95';
+                adminBtn.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-white bg-aqua-600 shadow-sm active:scale-95';
+                adminElements.forEach(el => el.classList.remove('hidden'));
+            } else {
+                cashierBtn.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-white bg-aqua-600 shadow-sm active:scale-95';
+                adminBtn.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-slate-300 hover:text-white active:scale-95';
+                adminElements.forEach(el => el.classList.add('hidden'));
+
+                const reportsView = document.getElementById('view-reports');
+                if (reportsView && !reportsView.classList.contains('hidden')) {
+                    switchTab('pos');
+                }
+            }
+        }
+
+        function openResetModal() {
+            if (appData.currentRole !== 'admin') {
+                showToast('Akses khusus Pemilik Depot!', true);
+                return;
+            }
+            document.getElementById('resetPinInput').value = '';
+            openModal('resetDataModal');
+        }
 
         // Date Helper: Formats local YYYY-MM-DD to avoid UTC time zone discrepancies
         function getLocalDateStr(dateObj = new Date()) {
@@ -1125,114 +1235,55 @@
             const saved = localStorage.getItem(STORAGE_KEY);
             if (saved) {
                 try {
-                    appData = JSON.parse(saved);
+                    const parsed = JSON.parse(saved);
+                    appData = {
+                        currentRole: parsed.currentRole || 'cashier',
+                        inventory: { ...DEFAULT_APP_DATA.inventory, ...(parsed.inventory || {}) },
+                        customers: Array.isArray(parsed.customers) ? parsed.customers : [],
+                        transactions: Array.isArray(parsed.transactions) ? parsed.transactions : [],
+                        expenses: Array.isArray(parsed.expenses) ? parsed.expenses : []
+                    };
                 } catch(e) {
                     console.error('Gagal memuat data lokal', e);
+                    appData = JSON.parse(JSON.stringify(DEFAULT_APP_DATA));
+                    saveToStorage();
                 }
-            }
-        }
-
-        function switchRole(role) {
-            if (role === 'admin') {
-                document.getElementById('adminPassInput').value = '';
-                openModal('adminPasswordModal');
-                setTimeout(() => document.getElementById('adminPassInput').focus(), 100);
-                return;
-            }
-            applyRoleChange(role);
-        }
-
-        function verifyAdminPassword(e) {
-            e.preventDefault();
-            const input = document.getElementById('adminPassInput').value;
-            if (input === '5546') {
-                closeModal('adminPasswordModal');
-                applyRoleChange('admin');
-                showToast('Akses Pemilik Depot Berhasil!');
             } else {
-                showToast('Password Salah! Gunakan kode 5546.', true);
-                document.getElementById('adminPassInput').value = '';
+                appData = JSON.parse(JSON.stringify(DEFAULT_APP_DATA));
+                saveToStorage();
+                setTimeout(() => showToast('Aplikasi siap digunakan! Tambahkan pelanggan pertama Anda.'), 500);
             }
         }
 
-        function applyRoleChange(role) {
-            appData.currentRole = role;
-            const cashierBtn = document.getElementById('roleCashierBtn');
-            const adminBtn = document.getElementById('roleAdminBtn');
-            const adminNavs = document.querySelectorAll('.admin-only');
-
-            if (role === 'cashier') {
-                cashierBtn.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-white bg-aqua-600 shadow-sm active:scale-95';
-                adminBtn.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-slate-300 hover:text-white bg-transparent active:scale-95';
-                adminNavs.forEach(el => el.classList.add('hidden'));
-                switchTab('pos');
-            } else {
-                adminBtn.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-white bg-aqua-600 shadow-sm active:scale-95';
-                cashierBtn.className = 'px-2.5 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1 text-slate-300 hover:text-white bg-transparent active:scale-95';
-                adminNavs.forEach(el => el.classList.remove('hidden'));
-                switchTab('dashboard');
-            }
-        }
-
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('border-aqua-500', 'text-white');
-                btn.classList.add('border-transparent');
-            });
-
-            const activeView = document.getElementById(`view-${tabId}`);
-            if (activeView) activeView.classList.remove('hidden');
-
-            const activeTabBtn = document.getElementById(`tab-${tabId}`);
-            if (activeTabBtn) {
-                activeTabBtn.classList.add('border-aqua-500', 'text-white');
-                activeTabBtn.classList.remove('border-transparent');
-            }
-
-            if (tabId === 'dashboard') renderCharts();
-            if (tabId === 'reports') renderPnLReport();
-        }
-
-        function showToast(msg, isError = false) {
-            const toast = document.getElementById('toast');
-            const toastMsg = document.getElementById('toastMsg');
-            const toastIcon = document.getElementById('toastIcon');
-
-            toastMsg.innerText = msg;
-            toastIcon.className = isError ? 'fa-solid fa-triangle-exclamation text-red-400 text-lg' : 'fa-solid fa-circle-check text-emerald-400 text-lg';
-
-            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-            }, 3000);
-        }
-
-        function openModal(id) {
-            const el = document.getElementById(id);
-            if (el) el.classList.remove('hidden');
-            if (id === 'adjustGallonModal') {
-                document.getElementById('adjFilled').value = appData.inventory.filledGallons;
-                document.getElementById('adjEmpty').value = appData.inventory.emptyGallons;
-            } else if (id === 'adjustConsumablesModal') {
-                document.getElementById('adjCaps').value = appData.inventory.caps;
-                document.getElementById('adjTissues').value = appData.inventory.tissues;
-                document.getElementById('adjSeals').value = appData.inventory.seals;
-            }
-        }
-
-        function closeModal(id) {
-            const el = document.getElementById(id);
-            if (el) el.classList.add('hidden');
-        }
-
-        function openResetModal() {
-            if (appData.currentRole !== 'admin') {
-                showToast('Hanya Pemilik Depot yang dapat mengakses fitur reset!', true);
-                return;
-            }
-            document.getElementById('resetPinInput').value = '';
-            openModal('resetDataModal');
+        function loadDemoData() {
+            appData = {
+                currentRole: appData.currentRole || 'cashier',
+                inventory: {
+                    filledGallons: 120,
+                    emptyGallons: 45,
+                    borrowedGallons: 18,
+                    caps: 450,
+                    tissues: 320,
+                    seals: 500
+                },
+                customers: [
+                    { id: 'c1', name: 'Kios Segar Barokah', phone: '081234567890', address: 'Blok A-02', balance: 60000, borrowedGallons: 10 },
+                    { id: 'c2', name: 'Ibu Rahma', phone: '081987654321', address: 'Jl. Mawar No. 45', balance: 18000, borrowedGallons: 3 },
+                    { id: 'c3', name: 'Warung Makan Sederhana', phone: '081456789012', address: 'Kawasan Ruko 10', balance: 0, borrowedGallons: 5 }
+                ],
+                transactions: [
+                    { id: 'tx-101', date: new Date().toISOString(), type: 'refill', itemDesc: 'Isi Ulang Galon', qty: 5, price: 6000, total: 30000, paymentMethod: 'cash', customerName: 'Pelanggan Umum' },
+                    { id: 'tx-102', date: new Date().toISOString(), type: 'new_gallon', itemDesc: 'Galon Baru + Isi', qty: 1, price: 55000, total: 55000, paymentMethod: 'qris', customerName: 'Ibu Rahma' },
+                    { id: 'tx-103', date: new Date().toISOString(), type: 'refill', itemDesc: 'Isi Ulang Galon', qty: 10, price: 6000, total: 60000, paymentMethod: 'tab', customerName: 'Kios Segar Barokah' }
+                ],
+                expenses: [
+                    { id: 'ex-201', date: new Date().toISOString(), category: 'Listrik & PLN', desc: 'Tagihan Listrik Depot Bulan Ini', loggedBy: 'Admin', amount: 250000 },
+                    { id: 'ex-202', date: new Date().toISOString(), category: 'Pembelian Air Tangki', desc: 'Air Baku Tangki Pegunungan 5.000L', loggedBy: 'Admin', amount: 350000 }
+                ]
+            };
+            saveToStorage();
+            renderAllViews();
+            showToast('Data demo simulasi berhasil dimuat!');
         }
 
         function executeManualReset(e) {
@@ -1275,26 +1326,13 @@
                     c.borrowedGallons = 0;
                 });
                 showToast('Stok Galon & Bahan Baku berhasil direset ke standar!');
+            } else if (option === 'demo') {
+                loadDemoData();
+                closeModal('resetDataModal');
+                return;
             } else if (option === 'factory') {
                 localStorage.removeItem(STORAGE_KEY);
-                appData = {
-                    currentRole: 'admin',
-                    inventory: {
-                        filledGallons: 100,
-                        emptyGallons: 50,
-                        borrowedGallons: 0,
-                        caps: 500,
-                        tissues: 500,
-                        seals: 500
-                    },
-                    customers: [
-                        { id: 'c1', name: 'Kios Segar Barokah', phone: '081234567890', address: 'Blok A-02', balance: 0, borrowedGallons: 0 },
-                        { id: 'c2', name: 'Ibu Rahma', phone: '081987654321', address: 'Jl. Mawar No. 45', balance: 0, borrowedGallons: 0 },
-                        { id: 'c3', name: 'Warung Makan Sederhana', phone: '081456789012', address: 'Kawasan Ruko 10', balance: 0, borrowedGallons: 0 }
-                    ],
-                    transactions: [],
-                    expenses: []
-                };
+                appData = JSON.parse(JSON.stringify(DEFAULT_APP_DATA));
                 showToast('Sistem berhasil direset total ke Mode Pabrik!');
             }
 
@@ -1395,7 +1433,6 @@
                 return;
             }
 
-            // Inventory Validation
             if (appData.inventory.filledGallons < qty) {
                 showToast('Stok Galon Isi tidak mencukupi untuk transaksi ini!', true);
                 return;
@@ -1424,13 +1461,12 @@
                 return;
             }
 
-            // Inventory Deduction Rules
             if (activeCart.type === 'loan') {
                 appData.inventory.filledGallons -= qty;
                 appData.inventory.borrowedGallons += qty;
             } else if (activeCart.type === 'new_gallon') {
-                appData.inventory.filledGallons -= qty; // Sold new filled gallon, empty gallons does not increase
-            } else { // refill or aqua_asli
+                appData.inventory.filledGallons -= qty;
+            } else {
                 appData.inventory.filledGallons -= qty;
                 appData.inventory.emptyGallons += qty;
             }
@@ -1438,7 +1474,6 @@
             appData.inventory.caps = Math.max(0, appData.inventory.caps - qty);
             appData.inventory.tissues = Math.max(0, appData.inventory.tissues - qty);
 
-            // Record Transaction
             const newTx = {
                 id: 'tx-' + Date.now().toString().slice(-5),
                 date: new Date().toISOString(),
@@ -1457,7 +1492,6 @@
             saveToStorage();
             renderAllViews();
 
-            // Setup Printed Receipt Modal
             document.getElementById('recDateTime').innerText = new Date().toLocaleString('id-ID');
             document.getElementById('recCustomerName').innerText = customerName;
             document.getElementById('recPaymentMethod').innerText = activeCart.paymentMethod.toUpperCase();
@@ -1511,7 +1545,6 @@
             const todayStr = getLocalDateStr(new Date());
             const monthStr = getLocalDateStr(new Date()).slice(0, 7);
 
-            // Filter out settlement transactions from sales revenue
             const productTxs = appData.transactions.filter(t => t.type !== 'settlement' && t.type !== 'loan');
 
             const todayTxs = productTxs.filter(t => getLocalDateStr(new Date(t.date)) === todayStr);
@@ -1533,7 +1566,6 @@
 
             document.getElementById('tab-receivable-badge').innerText = appData.customers.filter(c => c.balance > 0).length;
 
-            // Render Recent Transactions
             const recentTbody = document.getElementById('dashRecentSales');
             let recentHtml = '';
             appData.transactions.slice(0, 5).forEach(tx => {
@@ -1551,7 +1583,6 @@
             });
             recentTbody.innerHTML = recentHtml || '<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada transaksi dicatat</td></tr>';
 
-            // Render Consumables Widget
             const consumablesBox = document.getElementById('dashConsumablesList');
             consumablesBox.innerHTML = `
                 <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-xl text-xs">
@@ -1585,7 +1616,7 @@
                 `;
             });
 
-            tbody.innerHTML = html || '<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada pelanggan terdaftar</td></tr>';
+            tbody.innerHTML = html || '<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada pelanggan terdaftar. Klik "+ Tambah Pelanggan" untuk menambahkan.</td></tr>';
             document.getElementById('totalReceivableSum').innerText = formatRupiah(sumBalance);
         }
 
